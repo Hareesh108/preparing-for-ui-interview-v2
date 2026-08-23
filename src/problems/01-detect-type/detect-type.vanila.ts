@@ -33,7 +33,7 @@ export const detectType = (value: any): TType => {
   const proto = Object.getPrototypeOf(value)
   // console.log("proto:", proto);
 
-  return proto.constructor.name ?? "object"
+  return proto?.constructor?.name ?? "object"
 
 }
 
@@ -51,6 +51,10 @@ console.log(detectType(new Date()))  // Expected: "date"
 console.log(detectType(new Map()))   // Expected: "map"
 console.log(detectType(new Set()))   // Expected: "set"
 console.log(detectType(/regex/))     // Expected: "regexp"
+console.log(detectType(Object.create(null)))     // Expected: "regexp"
 
+
+// The typeof operator is insufficient for distinguishing specific JavaScript object types. 
+// It only returns broad categories such as "object" or "function". To identify specific types like Array, Date, Map, or custom class instances, you can inspect the object's prototype or constructor.
 console.log(typeof []);
 
